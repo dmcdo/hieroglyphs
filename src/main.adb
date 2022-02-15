@@ -79,7 +79,9 @@ begin
                end loop;
             end loop;
 
-            if ID >= 10 then
+            if not (ID > 9) then -- if there are no hieroglyphs
+               Put_Line ("");
+            else
                declare
                   -- Use this to count how many holes a given hieroglyph has
                   Glyphs : array (10 .. ID) of Integer;
