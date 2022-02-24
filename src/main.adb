@@ -100,10 +100,10 @@ begin
             else
                declare
                   -- Use this to count how many holes a given hieroglyph has
-                  Glyphs : array (10 .. ID) of Integer;
+                  Glyphs     : array (10 .. ID) of Integer;
                   GlyphNames : array (10 .. ID) of String (1 .. 1);
-                  Least : Integer;
-                  Tmp : String (1 .. 1);
+                  Least      : Integer;
+                  Tmp        : String (1 .. 1);
                begin
                   -- Initialize Glyphs with 0's.
                   for I in Glyphs'Range loop
