@@ -66,7 +66,23 @@ begin
             end loop;
 
             -- Fill Background with value Background
-            Do_Flood_Fill (Bitmap, 1, 1, Background);
+            -- Go along the edges of the Bitmap and fill all zero values with Background.
+            for J in 1 .. B loop
+               if Bitmap (1, J) = 0 then
+                  Do_Flood_Fill (Bitmap, 1, J, Background);
+               end if;
+               if Bitmap (R, J) = 0 then
+                  Do_Flood_Fill (Bitmap, R, J, Background);
+               end if;
+            end loop;
+            for I in 1 .. R loop
+               if Bitmap (I, 1) = 0 then
+                  Do_Flood_Fill (Bitmap, I, 1, Background);
+               end if;
+               if Bitmap (I, B) = 0 then
+                  Do_Flood_Fill (Bitmap, I, B, Background);
+               end if;
+            end loop;
 
             -- Assign each hieroglyph an ID of 10, 11, 12, 13, ...
             ID := 9;
@@ -85,6 +101,9 @@ begin
                declare
                   -- Use this to count how many holes a given hieroglyph has
                   Glyphs : array (10 .. ID) of Integer;
+                  GlyphNames : array (10 .. ID) of String (1 .. 1);
+                  Least : Integer;
+                  Tmp : String (1 .. 1);
                begin
                   -- Initialize Glyphs with 0's.
                   for I in Glyphs'Range loop
@@ -103,19 +122,39 @@ begin
                      end loop;
                   end loop;
 
-                  -- Print out the results
+                  -- Set GlyphNames
                   for I in Glyphs'Range loop
                      case (Glyphs (I)) is
-                        when 0 => Put ("W");
-                        when 1 => Put ("A");
-                        when 2 => Put ("K");
-                        when 3 => Put ("J");
-                        when 4 => Put ("S");
-                        when 5 => Put ("D");
+                        when 0 => GlyphNames (I) := "W";
+                        when 1 => GlyphNames (I) := "A";
+                        when 2 => GlyphNames (I) := "K";
+                        when 3 => GlyphNames (I) := "J";
+                        when 4 => GlyphNames (I) := "S";
+                        when 5 => GlyphNames (I) := "D";
                         when others => raise Ex with "Unknown Hieroglyph";
                      end case;
                   end loop;
                   Put_Line ("");
+
+                  -- Sort GlyphNames
+                  for I in GlyphNames'Range loop
+                     Least := I;
+                     for J in (I + 1) .. GlyphNames'Last loop
+                        if GlyphNames (J) < GlyphNames (Least) then
+                           Least := J;
+                        end if;
+                     end loop;
+
+                     Tmp := GlyphNames (I);
+                     GlyphNames (I) := GlyphNames (Least);
+                     GlyphNames (Least) := Tmp;
+                  end loop;
+
+                  -- Print out GlyphNames
+                  for I in GlyphNames'Range loop
+                     Put (GlyphNames (I));
+                  end loop;
+                  Put_Line("");
 
                end;
             end if;
