@@ -8,8 +8,8 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Flood_Fill;  use Flood_Fill;
 
 procedure Main is
-   Ex           : Exception;
-   Cur_Case : Integer := 1; --  Case number
+   Ex : exception;
+   Cur_Case : Natural := 1; --  Case number
 begin
    loop
       declare
@@ -31,7 +31,7 @@ begin
          if R = 0 and C = 0 then
             exit;
          else
-            Put ("Case " & Integer'Image (Cur_Case) & ": ");
+            Put ("Case" & Integer'Image (Cur_Case) & ": ");
          end if;
 
          -- Read in the image into Bitmap
@@ -63,7 +63,8 @@ begin
                      when 'd' | 'D' => X := 13;
                      when 'e' | 'E' => X := 14;
                      when 'f' | 'F' => X := 15;
-                     when others => raise Ex with "Invalid Character";
+                     when others =>
+                        raise Ex with "Invalid Character";
                   end case;
                   for K in 0 .. 3 loop
                      Bitmap (I, 4 * J - K) := X mod 2;
@@ -154,8 +155,8 @@ begin
                         end if;
                      end loop;
 
-                     Tmp := GlyphNames (I);
-                     GlyphNames (I) := GlyphNames (Least);
+                     Tmp                := GlyphNames (I);
+                     GlyphNames (I)     := GlyphNames (Least);
                      GlyphNames (Least) := Tmp;
                   end loop; -- End Sort
 
@@ -163,7 +164,7 @@ begin
                   for I in GlyphNames'Range loop
                      Put (GlyphNames (I));
                   end loop;
-                  Put_Line("");
+                  Put_Line ("");
 
                end;
             end if;
