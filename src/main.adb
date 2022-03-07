@@ -2,7 +2,7 @@
 --  Author: Jordan Arevalos, Jarevalos2017@my.fit.edu
 --  Course: CSE 4250, Spring 2022
 --  Project: Proj2, Egyptian Hieroglyphs
---  Language Implementation: GNAT 20210519-103
+--  Language Implementation: GNAT Community 2021 (20210519-103)
 
 with Ada.Text_IO; use Ada.Text_IO;
 with Flood_Fill;  use Flood_Fill;
