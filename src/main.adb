@@ -12,26 +12,28 @@ procedure Main is
 begin
    loop
       declare
-         Buffer     : String           := Get_Line;
+         Buffer     : String           := Get_Line; -- read in first line
          I          : Integer          := Buffer'First;
-         R, C, B    : Integer;
+         R, C, B    : Integer; -- Rows, Columns, Binary Columns
          Background : constant Integer := -1;
       begin
-         -- Read Rows, Cols of input
+         -- PARSE INPUT
+         -- Split the two numbers in the first line by a space char
          while Buffer (I) /= ' ' loop
             I := I + 1;
          end loop;
-         R := Integer'Value (Buffer (Buffer'First .. I - 1));
-         C := Integer'Value (Buffer (I + 1 .. Buffer'Last));
-         B := 4 * C; -- Cols after converte from hex to binary
+         R := Integer'Value (Buffer (Buffer'First .. I - 1)); -- parse rows
+         C := Integer'Value (Buffer (I + 1 .. Buffer'Last)); -- parse cols
+         B := 4 * C; -- Cols after converting from ascii hex to binary
 
          -- Exit if end of input
          if R = 0 and C = 0 then
             exit;
          end if;
 
+         -- Read in the image into Bitmap
          declare
-            Bitmap : Array2D (1 .. R, 1 .. B);
+            Bitmap : Array2D (1 .. R, 1 .. B); -- declare RxB bitmap
             Buffer : String (1 .. C);
             X      : Integer;
             ID     : Integer;
@@ -40,6 +42,7 @@ begin
             for I in 1 .. R loop
                Buffer := Get_Line;
                for J in 1 .. C loop
+                  -- convert this character into binary
                   case (Buffer (J)) is
                      when '0' => X := 0;
                      when '1' => X := 1;
@@ -64,9 +67,12 @@ begin
                      X                     := X / 2;
                   end loop;
                end loop;
-            end loop;
+            end loop; -- done reading image
 
-            -- Fill Background with value Background
+            -- DONE PARSING INPUT
+
+            -- PROCESS DATA
+            -- Fill the background of the image with value Background
             -- Go along the edges of the Bitmap and fill all zero values with Background.
             for J in 1 .. B loop
                if Bitmap (1, J) = 0 then
@@ -137,7 +143,7 @@ begin
                   end loop;
                   Put_Line ("");
 
-                  -- Sort GlyphNames
+                  -- Sort GlyphNames (Selection Sort)
                   for I in GlyphNames'Range loop
                      Least := I;
                      for J in (I + 1) .. GlyphNames'Last loop
@@ -149,7 +155,7 @@ begin
                      Tmp := GlyphNames (I);
                      GlyphNames (I) := GlyphNames (Least);
                      GlyphNames (Least) := Tmp;
-                  end loop;
+                  end loop; -- End Sort
 
                   -- Print out GlyphNames
                   for I in GlyphNames'Range loop
