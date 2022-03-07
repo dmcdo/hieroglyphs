@@ -6,6 +6,8 @@ package body Flood_Fill is
      (A : in out Array2D; I : Integer; J : Integer; New_Color : Integer)
    is
       type IntPair is array (1 .. 2) of Integer;
+
+      -- Use Ada's built-in Linked List type as a stack
       package DLL is new Ada.Containers.Doubly_Linked_Lists
         (Element_Type => IntPair);
 
@@ -32,6 +34,7 @@ package body Flood_Fill is
            V >= A'First (2) and then V <= A'Last (2) and then
            A (U, V) = Color
          then
+            -- push all of (U, V)'s neighbors to the stack
             A (U, V) := New_Color;
             Stack.Append((U - 1, V));
             Stack.Append((U + 1, V));
