@@ -8,7 +8,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Flood_Fill;  use Flood_Fill;
 
 procedure Main is
-   Ex : exception;
+   Ex       : exception;
    Cur_Case : Natural := 1; --  Case number
 begin
    loop
@@ -63,8 +63,7 @@ begin
                      when 'd' | 'D' => X := 13;
                      when 'e' | 'E' => X := 14;
                      when 'f' | 'F' => X := 15;
-                     when others =>
-                        raise Ex with "Invalid Character";
+                     when others => raise Ex with "Invalid Character";
                   end case;
                   for K in 0 .. 3 loop
                      Bitmap (I, 4 * J - K) := X mod 2;
