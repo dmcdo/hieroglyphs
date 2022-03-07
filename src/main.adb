@@ -8,7 +8,8 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Flood_Fill;  use Flood_Fill;
 
 procedure Main is
-   Ex : Exception;
+   Ex           : Exception;
+   Cur_Case : Integer := 1; --  Case number
 begin
    loop
       declare
@@ -29,6 +30,8 @@ begin
          -- Exit if end of input
          if R = 0 and C = 0 then
             exit;
+         else
+            Put ("Case " & Integer'Image (Cur_Case) & ": ");
          end if;
 
          -- Read in the image into Bitmap
@@ -141,7 +144,6 @@ begin
                         when others => raise Ex with "Unknown Hieroglyph";
                      end case;
                   end loop;
-                  Put_Line ("");
 
                   -- Sort GlyphNames (Selection Sort)
                   for I in GlyphNames'Range loop
@@ -165,8 +167,9 @@ begin
 
                end;
             end if;
-
          end;
       end;
+
+      Cur_Case := Cur_Case + 1;
    end loop;
 end Main;
