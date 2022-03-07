@@ -1,4 +1,5 @@
 --  Author: Dylan McDougall, dmcdougall2019@my.fit.edu
+--  Author: Jordan Arevalos, Jarevalos2017@my.fit.edu
 --  Course: CSE 4250, Spring 2022
 --  Project: Proj2, Egyptian Hieroglyphs
 --  Language Implementation: GNAT 20210519-103
