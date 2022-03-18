@@ -30,16 +30,15 @@ package body Flood_Fill is
          Stack.Delete_Last;
 
          -- if (U, V) is within A's bounds
-         if U >= A'First (1) and then U <= A'Last (1) and then
-           V >= A'First (2) and then V <= A'Last (2) and then
-           A (U, V) = Color
+         if U >= A'First (1) and then U <= A'Last (1) and then V >= A'First (2)
+           and then V <= A'Last (2) and then A (U, V) = Color
          then
             -- push all of (U, V)'s neighbors to the stack
             A (U, V) := New_Color;
-            Stack.Append((U - 1, V));
-            Stack.Append((U + 1, V));
-            Stack.Append((U, V - 1));
-            Stack.Append((U, V + 1));
+            Stack.Append ((U - 1, V));
+            Stack.Append ((U + 1, V));
+            Stack.Append ((U, V - 1));
+            Stack.Append ((U, V + 1));
 
          end if;
       end loop;

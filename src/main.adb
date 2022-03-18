@@ -8,7 +8,7 @@ with Ada.Text_IO; use Ada.Text_IO;
 with Flood_Fill;  use Flood_Fill;
 
 procedure Main is
-   Ex       : exception;
+   Ex : exception;
    Cur_Case : Natural := 1; --  Case number
 begin
    loop
@@ -47,23 +47,40 @@ begin
                for J in 1 .. C loop
                   -- convert this character into binary
                   case (Buffer (J)) is
-                     when '0' => X := 0;
-                     when '1' => X := 1;
-                     when '2' => X := 2;
-                     when '3' => X := 3;
-                     when '4' => X := 4;
-                     when '5' => X := 5;
-                     when '6' => X := 6;
-                     when '7' => X := 7;
-                     when '8' => X := 8;
-                     when '9' => X := 9;
-                     when 'a' | 'A' => X := 10;
-                     when 'b' | 'B' => X := 11;
-                     when 'c' | 'C' => X := 12;
-                     when 'd' | 'D' => X := 13;
-                     when 'e' | 'E' => X := 14;
-                     when 'f' | 'F' => X := 15;
-                     when others => raise Ex with "Invalid Character";
+                     when '0' =>
+                        X := 0;
+                     when '1' =>
+                        X := 1;
+                     when '2' =>
+                        X := 2;
+                     when '3' =>
+                        X := 3;
+                     when '4' =>
+                        X := 4;
+                     when '5' =>
+                        X := 5;
+                     when '6' =>
+                        X := 6;
+                     when '7' =>
+                        X := 7;
+                     when '8' =>
+                        X := 8;
+                     when '9' =>
+                        X := 9;
+                     when 'a' | 'A' =>
+                        X := 10;
+                     when 'b' | 'B' =>
+                        X := 11;
+                     when 'c' | 'C' =>
+                        X := 12;
+                     when 'd' | 'D' =>
+                        X := 13;
+                     when 'e' | 'E' =>
+                        X := 14;
+                     when 'f' | 'F' =>
+                        X := 15;
+                     when others =>
+                        raise Ex with "Invalid Character";
                   end case;
                   for K in 0 .. 3 loop
                      Bitmap (I, 4 * J - K) := X mod 2;
@@ -75,8 +92,8 @@ begin
             -- DONE PARSING INPUT
 
             -- PROCESS DATA
-            -- Fill the background of the image with value Background
-            -- Go along the edges of the Bitmap and fill all zero values with Background.
+-- Fill the background of the image with value Background
+-- Go along the edges of the Bitmap and fill all zero values with Background.
             for J in 1 .. B loop
                if Bitmap (1, J) = 0 then
                   Do_Flood_Fill (Bitmap, 1, J, Background);
@@ -135,13 +152,20 @@ begin
                   -- Set GlyphNames
                   for I in Glyphs'Range loop
                      case (Glyphs (I)) is
-                        when 0 => GlyphNames (I) := "W";
-                        when 1 => GlyphNames (I) := "A";
-                        when 2 => GlyphNames (I) := "K";
-                        when 3 => GlyphNames (I) := "J";
-                        when 4 => GlyphNames (I) := "S";
-                        when 5 => GlyphNames (I) := "D";
-                        when others => raise Ex with "Unknown Hieroglyph";
+                        when 0 =>
+                           GlyphNames (I) := "W";
+                        when 1 =>
+                           GlyphNames (I) := "A";
+                        when 2 =>
+                           GlyphNames (I) := "K";
+                        when 3 =>
+                           GlyphNames (I) := "J";
+                        when 4 =>
+                           GlyphNames (I) := "S";
+                        when 5 =>
+                           GlyphNames (I) := "D";
+                        when others =>
+                           raise Ex with "Unknown Hieroglyph";
                      end case;
                   end loop;
 
